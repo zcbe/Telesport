@@ -1,3 +1,49 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<!-- Utilisation de ng-container avec la directive *ngIf pour conditionnellement afficher du contenu -->
+<ng-container *ngIf="generalInformation && generalInformation.length > 0; else hasNoData">
+  <!-- Si generalInformation existe et contient au moins un élément, afficher ce contenu -->
+  <section class="dashboard">
+
+
+  <section class="main-box-with-green-background">Medals per Country</section>
+  
+  <!-- Conteneur flexbox pour aligner les éléments enfants de manière flexible -->
+  <section class="flexbox-container">
+    <!-- Boucle sur chaque élément de generalInformation avec ngFor et utilise le composant app-title-information -->
+    <app-title-information *ngFor="let info of generalInformation"
+                          [title]="info.title" [value]="info.value">
+    </app-title-information>
+    <!--
+      Pour chaque élément 'info' dans generalInformation,
+      un composant app-title-information est créé avec les propriétés 'title' et 'value' définies
+      selon les valeurs de 'info'.
+    -->
+  </section>
+
+  <!-- Conteneur pour le graphique circulaire ngx-charts-pie-chart -->
+  <section class="ngx-chart-pie">
+    <ngx-charts-pie-chart
+      [scheme]="colorScheme"     
+      [results]="pieChartData"      
+      [labels]="true"              
+      [view]="view"                 
+      [legend]="false"              
+      [doughnut]="false"            
+      [gradient]="false"            
+      [animations]="true"           
+    >
+      <!-- Template personnalisé pour les tooltips -->
+      <ng-template #tooltipTemplate let-model="model">
+        <div class="custom-tooltip">
+          <p>{{ model.name }}</p> <!-- Nom de la section du graphique -->
+          <p>{{ model.value }} medals</p> <!-- Valeur de la section du graphique avec le mot "medals" -->
+        </div>
+      </ng-template>
+    </ngx-charts-pie-chart>
+  </section>
+  </section>
+</ng-container>
+
+<!-- Template à afficher si la condition dans ngIf est fausse -->
+<ng-template #hasNoData>
+  <p>No data available.</p> <!-- Message à afficher s'il n'y a pas de données -->
+</ng-template>
