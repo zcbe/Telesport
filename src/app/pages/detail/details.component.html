@@ -1,21 +1,32 @@
 <ng-container *ngIf="isSelectedCountryValid; else hasNoData">
-    <section class="dashboard">
-
+  <section class="dashboard">
+    <section class="main-box-with-green-background">
+      <span>{{ countryName }}</span>
     </section>
-  </ng-container>
-  
-  <ng-template #hasNoData>
-    <p>No data available.</p>
-  </ng-template>
-  <section class="main-box-with-green-background">
-    <span >
-      {{ countryName }}
-    </span>
-  </section>
+   
 
-  
-  <div class="button-container">
-    <button class="button" (click)="goBackToHomePage()">Go back</button>
-  </div>
-  
-  
+    <!-- Ajout du graphique en ligne -->
+    <section *ngIf="lineChartData && lineChartData.length > 0">
+      <ngx-charts-line-chart
+        [results]="lineChartData"
+        [view]="view"
+        [scheme]="colorScheme"
+        [legend]="false"
+        [xAxis]="true"
+        [yAxis]="true"
+        [autoScale]="true"
+        (select)="onSelect($event)">
+      </ngx-charts-line-chart>
+    </section>
+
+     
+    <div class="button-container">
+      <button class="button" (click)="goBackToHomePage()">Go back</button>
+    </div>
+
+  </section>
+</ng-container>
+
+<ng-template #hasNoData>
+  <p>No data available.</p>
+</ng-template>

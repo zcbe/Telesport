@@ -10,7 +10,7 @@ import { Color, ScaleType } from '@swimlane/ngx-charts';
 })
 export class DetailsComponent implements OnInit {
   public countryName: string = '';
-  public isSelectedCountryValid: boolean = false; // Initialisez comme false
+  public isSelectedCountryValid: boolean = false;
   public numberOfEntries: number = 0;
   public totalNumberMedals: number = 0;
   public totalNumberAthletes: number = 0;
@@ -32,9 +32,6 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.countryName = this.route.snapshot.paramMap.get('countryName') || '';
-    console.log('Country Name:', this.countryName); // Debugging line
-
-    // Vérifiez la validité du pays sélectionné
     if (!this.countryName) {
       this.isSelectedCountryValid = false;
       return;
@@ -43,8 +40,6 @@ export class DetailsComponent implements OnInit {
     this.olympicService.getOlympics().subscribe(
       (data: any[]) => {
         const countryData = data.find(item => item.country === this.countryName);
-        console.log('Country Data:', countryData); // Debugging line
-
         if (countryData) {
           this.numberOfEntries = countryData.participations.length;
           this.totalNumberMedals = this.calculateTotalMedals(countryData.participations);
@@ -57,15 +52,12 @@ export class DetailsComponent implements OnInit {
             { title: 'Total Number of Athletes', value: this.totalNumberAthletes },
           ];
 
-          // Mettez à jour la validité du pays sélectionné
           this.isSelectedCountryValid = true;
         } else {
-          console.error('Données non trouvées pour le pays:', this.countryName);
           this.isSelectedCountryValid = false;
         }
       },
       (error) => {
-        console.error('Erreur lors de la récupération des données:', error);
         this.isSelectedCountryValid = false;
       }
     );
@@ -80,15 +72,21 @@ export class DetailsComponent implements OnInit {
   }
 
   private prepareLineChartData(participations: any[]): any[] {
-    return participations.map(participation => ({
-      name: participation.year,
-      value: participation.medalsCount
-    }));
+    return [
+      {
+        name: 'Medals',
+        series: participations.map(participation => ({
+          name: participation.year,
+          value: participation.medalsCount
+        }))
+      }
+    ];
   }
 
-  /**
-   * Navigate back to Homepage
-   */
+  onSelect(event: any): void {
+    console.log(event);
+  }
+
   goBackToHomePage(): void {
     this.routerService.navigateByUrl('/');
   }
