@@ -11,6 +11,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 // Importation directe du composant autonome, si nécessaire
 import { TitleInformationComponent } from './components/title-information/title-information.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { TitleInformationComponent } from './components/title-information/title-
     NgxChartsModule,
     RouterModule,
     CommonModule,
-    TitleInformationComponent
+    TitleInformationComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
