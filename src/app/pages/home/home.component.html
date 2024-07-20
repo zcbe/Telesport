@@ -2,7 +2,9 @@
   <section class="dashboard">
     <section class="main-box-with-green-background">Medals per Country</section>
     <section class="flexbox-container">
-
+        <app-tile-information *ngFor="let info of generalInformation"
+                              [title]="info.title" [value]="info.value">
+        </app-tile-information>
     </section>
     <section class="ngx-chart-pie">
       <ngx-charts-pie-chart
