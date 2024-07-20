@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {PieChartTooltipComponent} from "./components/pie-chart-tooltip/pie-chart-tooltip.component";
+
 
 // Importation directe du composant autonome, si nécessaire
 import { TitleInformationComponent } from './components/title-information/title-information.component';
@@ -29,7 +31,8 @@ import { FooterComponent } from './components/footer/footer.component';
     CommonModule,
     TitleInformationComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    PieChartTooltipComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -33,10 +33,7 @@
     >
       <!-- Template personnalisé pour les tooltips -->
       <ng-template #tooltipTemplate let-model="model">
-        <div class="custom-tooltip">
-          <p>{{ model.name }}</p> <!-- Nom de la section du graphique -->
-          <p>{{ model.value }} medals</p> <!-- Valeur de la section du graphique avec le mot "medals" -->
-        </div>
+        <app-pie-chart-tooltip [country]="model.name" [medals]="model.value"></app-pie-chart-tooltip>
       </ng-template>
     </ngx-charts-pie-chart>
   </section>
