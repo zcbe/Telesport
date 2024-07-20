@@ -1,0 +1,21 @@
+<ng-container *ngIf="isSelectedCountryValid; else hasNoData">
+    <section class="dashboard">
+
+    </section>
+  </ng-container>
+  
+  <ng-template #hasNoData>
+    <p>No data available.</p>
+  </ng-template>
+  <section class="main-box-with-green-background">
+    <span >
+      {{ countryName }}
+    </span>
+  </section>
+
+  
+  <div class="button-container">
+    <button class="button" (click)="goBackToHomePage()">Go back</button>
+  </div>
+  
+  

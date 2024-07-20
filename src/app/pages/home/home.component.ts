@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { OlympicService } from 'src/app/core/services/olympic.service';
-import { Router } from '@angular/router'; // Import Router
+import { Router } from '@angular/router';
 
 type DashboardInformation = {
   totalOlympics: number,
@@ -37,19 +37,14 @@ export class HomeComponent implements OnInit {
     this.olympics$.subscribe(
       (data: any[]) => {
         if (data) {
-          // Prepare pie chart data
           this.pieChartData = data.map((item: any) => ({
             name: item.country,
             value: this.calculateTotalMedals(item.participations),
           }));
 
-          // Calculate the number of countries
           this.countries = this.calculateNumberOfCountries(data);
-
-          // Calculate the total number of Olympics
           this.totalOlympics = this.calculateTotalOlympics(data);
 
-          // Prepare general information
           this.generalInformation = [
             { title: 'Number of JOs', value: this.totalOlympics },
             { title: 'Number of countries', value: this.countries },
@@ -76,7 +71,16 @@ export class HomeComponent implements OnInit {
 
   private calculateTotalOlympics(data: any[]): number {
     return data.reduce((total: number, item: any) => {
-      return total + item.participations.length; // Assuming each item in participations represents one Olympic event
+      return total + item.participations.length;
     }, 0);
+  }
+
+  /**
+   * Méthode appelée lorsque l'événement 'select' est déclenché
+   * @param event - Les données de l'événement sélectionné
+   */
+  onSelect(event: any): void {
+    // Par exemple, vous pouvez naviguer vers une page de détails en passant le nom du pays
+    this.router.navigate(['/details', event.name]);
   }
 }
