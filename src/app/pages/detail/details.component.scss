@@ -22,14 +22,43 @@
     margin-right: auto; 
 }
 
-  
+.flexbox-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 10px;
+  margin-bottom: 120px;
+}
+
+
+.ngx-chart-line{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 400px;
+  height: 200px;
+  margin-left: 30%;
+  margin-right: 30%;
+  width: 35%;
+  margin-top: 20px; /* Assurez-vous qu'il y a de l'espace au-dessus du graphique */
+
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px; /* Ajout d'un espace au-dessus du bouton */
+}
 
   .button {
     padding: 10px 20px;
     background-color: #4CAF50; /* Green background */
     border: none;
     color: white;
-    text-align: center;
+    justify-content: center;
+    align-items: center; 
     text-decoration: none;
     display: inline-block;
     font-size: 16px;

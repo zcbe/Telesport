@@ -10,7 +10,7 @@
   </section>
 
     <!-- Ajout du graphique en ligne -->
-    <section *ngIf="lineChartData && lineChartData.length > 0">
+    <section class="ngx-chart-line">>
       <ngx-charts-line-chart
         [results]="lineChartData"
         [view]="view"
@@ -24,9 +24,9 @@
     </section>
 
      
-    <div class="button-container">
+    <section class="button-container">
       <button class="button" (click)="goBackToHomePage()">Go back</button>
-    </div>
+    </section>
 
   </section>
 </ng-container>
