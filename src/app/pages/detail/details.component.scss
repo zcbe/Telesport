@@ -75,3 +75,14 @@
     color: #4CAF50; /* Green text on hover */
     border: 2px solid #4CAF50; /* Green border on hover */
   }
+
+
+  @media (max-width: 480px) {
+    .main-box-with-green-background {
+      width: 40%;
+  }
+  .button-container {
+    margin-top: 120px; 
+  }
+  
+}

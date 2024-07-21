@@ -6,16 +6,19 @@
 .main-box-with-green-background {
   background: #04838f;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 30px;
   color: white;
   border-radius: 10px;
   padding: 20px;
-  height: 20px;
+  height: 20px; 
   width: 20%;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
   text-align: center;
   margin-bottom: 20px;
-  margin-left: 39%;
-  margin-right: 35%;
+  margin-left: auto; 
+  margin-right: auto; 
 }
 
 .flexbox-container{
@@ -60,7 +63,7 @@
   .main-box-with-green-background {
     width: 40%;
     margin-left: 25%;
-    font-size: 14px;
+    font-size: 22px;
     margin-top: 20px;
   }
 }

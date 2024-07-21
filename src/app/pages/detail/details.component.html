@@ -7,11 +7,12 @@
       <app-tile-information *ngFor="let info of generalInformation"
                             [title]="info.title" [value]="info.value">
       </app-tile-information>
-  </section>
+    </section>
 
     <!-- Ajout du graphique en ligne -->
-    <section class="ngx-chart-line">>
+    <section class="ngx-chart-line">
       <ngx-charts-line-chart
+        (window:resize)="onResize($event)"
         [results]="lineChartData"
         [view]="view"
         [scheme]="colorScheme"
@@ -22,12 +23,10 @@
         (select)="onSelect($event)">
       </ngx-charts-line-chart>
     </section>
-
      
     <section class="button-container">
       <button class="button" (click)="goBackToHomePage()">Go back</button>
     </section>
-
   </section>
 </ng-container>
 

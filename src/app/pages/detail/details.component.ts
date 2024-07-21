@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
@@ -31,6 +31,7 @@ export class DetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.view = [window.innerWidth / 1.3, 400];
     this.countryName = this.route.snapshot.paramMap.get('countryName') || '';
     if (!this.countryName) {
       this.isSelectedCountryValid = false;
@@ -89,5 +90,11 @@ export class DetailsComponent implements OnInit {
 
   goBackToHomePage(): void {
     this.routerService.navigateByUrl('/');
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.view = [event.target.innerWidth / 1, 800];
+    this.view = [event.target.innerHeeight / 1, 400];
   }
 }
