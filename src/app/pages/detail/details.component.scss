@@ -41,7 +41,8 @@
   margin-left: 30%;
   margin-right: 30%;
   width: 35%;
-  margin-top: 20px; /* Assurez-vous qu'il y a de l'espace au-dessus du graphique */
+  margin-top: 20px; 
+  margin-bottom: 140px;
 
 }
 
@@ -49,7 +50,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 150px; /* Ajout d'un espace au-dessus du bouton */
+  margin-top: 50px; /* Ajout d'un espace au-dessus du bouton */
 }
 
   .button {
@@ -76,13 +77,19 @@
     border: 2px solid #4CAF50; /* Green border on hover */
   }
 
-
+  .text-error {
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 40px;
+  }
+  
   @media (max-width: 480px) {
     .main-box-with-green-background {
       width: 40%;
   }
   .button-container {
-    margin-top: 120px; 
+    margin-top: 50px; 
   }
   
 }

@@ -29,8 +29,12 @@ export class HomeComponent implements OnInit {
     group: ScaleType.Ordinal,
   };
 
-  constructor(private olympicService: OlympicService, private router: Router) { // Inject Router
+  constructor(private olympicService: OlympicService, 
+    private router: Router,
+    private routerService: Router
+    ) { 
     this.olympics$ = this.olympicService.getOlympics();
+
   }
 
   ngOnInit(): void {

@@ -30,5 +30,8 @@
 </ng-container>
 
 <ng-template #hasNoData>
-  <p>No data available.</p>
+  <p class="text-error">No data available.</p>
+    <div class="button-container">
+      <button class="button" (click)="goBackToHomePage()">Go back</button>
+    </div>
 </ng-template>
