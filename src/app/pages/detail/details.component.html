@@ -12,7 +12,6 @@
     <!-- Ajout du graphique en ligne -->
     <section class="ngx-chart-line">
       <ngx-charts-line-chart
-        (window:resize)="onResize($event)"
         [results]="lineChartData"
         [view]="view"
         [scheme]="colorScheme"

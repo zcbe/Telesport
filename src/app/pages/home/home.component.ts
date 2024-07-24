@@ -17,7 +17,7 @@ type DashboardInformation = {
 export class HomeComponent implements OnInit {
   public olympics$: Observable<any[]>;
   public pieChartData: any[] = [];
-  public view: [number, number] = [700, 400];
+  public view: [number, number] = [400, 500];
   public countries: number = 0;
   public totalOlympics: number = 0;
   public generalInformation: { title: string, value: number }[] = [];

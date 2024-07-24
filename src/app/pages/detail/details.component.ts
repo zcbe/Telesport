@@ -15,7 +15,7 @@ export class DetailsComponent implements OnInit {
   public totalNumberMedals: number = 0;
   public totalNumberAthletes: number = 0;
   public lineChartData: any[] = [];
-  public view: [number, number] = [700, 400];
+  public view: [number, number] = [400, 500];
   public colorScheme: Color = {
     domain: ['rgb(25, 25, 112)', 'rgb(31, 81, 255)', 'rgb(167, 199, 231)', 'rgb(204, 204, 255)', 'rgb(150, 222, 209)'],
     name: 'cool',
@@ -92,9 +92,4 @@ export class DetailsComponent implements OnInit {
     this.routerService.navigateByUrl('/');
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any): void {
-    this.view = [event.target.innerWidth / 1, 800];
-    this.view = [event.target.innerHeeight / 1, 400];
-  }
 }

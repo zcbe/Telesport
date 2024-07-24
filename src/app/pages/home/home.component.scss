@@ -1,7 +1,7 @@
 .dashboard{
   justify-content: center;
   align-items: center;
-  height: 700px;
+  height: 600px;
 }
 .main-box-with-green-background {
   background: #04838f;
@@ -30,7 +30,7 @@
 
 
 .ngx-chart-pie{
-  margin-top: 150px;
+  margin-top: 80px;
   display: flex;
   justify-content: center;
   align-items: center; 
@@ -54,7 +54,6 @@
   .ngx-chart-pie {
     width: 150px;
     height: 200px;
-    margin-top: 150px;
     margin-left: 40%;
     margin-right: 40%;
     width: 20%
