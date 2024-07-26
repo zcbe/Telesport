@@ -30,8 +30,8 @@
 </ng-container>
 
 <ng-template #hasNoData>
-  <p class="text-error">No data available.</p>
-    <div class="button-container">
-      <button class="button" (click)="goBackToHomePage()">Go back</button>
-    </div>
+  <p class="text-error">No data was found for country : {{ countryName }}</p>
+  <div class="button-container">
+    <button class="button" (click)="goBackToHomePage()">Go back</button>
+  </div>
 </ng-template>

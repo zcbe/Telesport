@@ -1,22 +1,22 @@
-<ng-container *ngIf="generalInformation && generalInformation.length > 0; else hasNoData">
+<ng-container *ngIf="(dashboard$ | async) as dashboardInfo; else hasNoData">
   <section class="dashboard">
     <section class="main-box-with-green-background">Medals per Country</section>
     <section class="flexbox-container">
-        <app-tile-information *ngFor="let info of generalInformation"
-                              [title]="info.title" [value]="info.value">
-        </app-tile-information>
+      <app-tile-information *ngFor="let info of dashboardInfo.generalInformation"
+                            [title]="info.title" [value]="info.value">
+      </app-tile-information>
     </section>
     <section class="ngx-chart-pie">
       <ngx-charts-pie-chart
-        [scheme]="colorScheme"     
-        [results]="pieChartData"      
-        [labels]="true"              
-        [view]="view"                 
-        [legend]="false"              
-        [doughnut]="false"            
-        [gradient]="false"            
-        [animations]="true"      
-        (select)="onSelect($event)"     
+        [scheme]="colorScheme"
+        [results]="dashboardInfo.pieChartData"
+        [labels]="true"
+        [view]="view"
+        [legend]="false"
+        [doughnut]="false"
+        [gradient]="false"
+        [animations]="true"
+        (select)="onSelect($event)"
       >
         <ng-template #tooltipTemplate let-model="model">
           <app-pie-chart-tooltip [country]="model.name" [medals]="model.value"></app-pie-chart-tooltip>

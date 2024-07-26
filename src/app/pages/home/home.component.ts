@@ -1,90 +1,97 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Router } from '@angular/router';
 
-type DashboardInformation = {
-  totalOlympics: number,
-  totalCountries: number,
-};
+interface Participation {
+  year: number;
+  medalsCount: number;
+  athleteCount: number;
+}
+
+interface OlympicData {
+  country: string;
+  participations: Participation[];
+}
+
+interface DashboardInformation {
+  pieChartData: { name: string; value: number }[];
+  countries: number;
+  totalOlympics: number;
+  generalInformation: { title: string; value: number }[];
+}
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public olympics$: Observable<any[]>;
-  public pieChartData: any[] = [];
+  public olympics$: Observable<OlympicData[]>;
+  public dashboard$: Observable<DashboardInformation>;
   public view: [number, number] = [400, 500];
-  public countries: number = 0;
-  public totalOlympics: number = 0;
-  public generalInformation: { title: string, value: number }[] = [];
   public showLegend = true;
   public colorScheme: Color = {
-    domain: ['rgb(25, 25, 112)', 'rgb(31, 81, 255)', 'rgb(167, 199, 231)','rgb(204, 204, 255)', 'rgb(150, 222, 209)'],
+    domain: ['rgb(25, 25, 112)', 'rgb(31, 81, 255)', 'rgb(167, 199, 231)', 'rgb(204, 204, 255)', 'rgb(150, 222, 209)'],
     name: 'cool',
     selectable: true,
     group: ScaleType.Ordinal,
   };
 
-  constructor(private olympicService: OlympicService, 
-    private router: Router,
-    private routerService: Router
-    ) { 
+  constructor(private olympicService: OlympicService, private router: Router) {
     this.olympics$ = this.olympicService.getOlympics();
-
-  }
-
-  ngOnInit(): void {
-    this.olympics$.subscribe(
-      (data: any[]) => {
-        if (data) {
-          this.pieChartData = data.map((item: any) => ({
-            name: item.country,
-            value: this.calculateTotalMedals(item.participations),
-          }));
-
-          this.countries = this.calculateNumberOfCountries(data);
-          this.totalOlympics = this.calculateTotalOlympics(data);
-
-          this.generalInformation = [
-            { title: 'Number of JOs', value: this.totalOlympics },
-            { title: 'Number of countries', value: this.countries },
-          ];
-        } else {
+    this.dashboard$ = this.olympics$.pipe(
+      map((data: OlympicData[] | null) => {
+        if (!data) {
           console.error('Les données reçues sont undefined ou null');
+          return { pieChartData: [], countries: 0, totalOlympics: 0, generalInformation: [] };
         }
-      },
-      (error) => {
+
+        const pieChartData = data.map((item: OlympicData) => ({
+          name: item.country,
+          value: this.calculateTotalMedals(item.participations),
+        }));
+
+        const countries = this.calculateNumberOfCountries(data);
+        const totalOlympics = this.calculateTotalOlympics(data);
+
+        const generalInformation = [
+          { title: 'Number of JOs', value: totalOlympics },
+          { title: 'Number of countries', value: countries },
+        ];
+
+        return { pieChartData, countries, totalOlympics, generalInformation };
+      }),
+      catchError((error) => {
         console.error('Erreur lors de la récupération des données:', error);
-      }
+        return of({ pieChartData: [], countries: 0, totalOlympics: 0, generalInformation: [] });
+      })
     );
   }
 
-  private calculateTotalMedals(participations: any[]): number {
-    return participations.reduce((total: number, participation: any) => {
+  ngOnInit(): void {
+    // Aucune souscription ici
+  }
+
+  private calculateTotalMedals(participations: Participation[]): number {
+    return participations.reduce((total: number, participation: Participation) => {
       return total + participation.medalsCount;
     }, 0);
   }
 
-  private calculateNumberOfCountries(data: any[]): number {
+  private calculateNumberOfCountries(data: OlympicData[]): number {
     return data.length;
   }
 
-  private calculateTotalOlympics(data: any[]): number {
-    return data.reduce((total: number, item: any) => {
+  private calculateTotalOlympics(data: OlympicData[]): number {
+    return data.reduce((total: number, item: OlympicData) => {
       return total + item.participations.length;
     }, 0);
   }
 
-  /**
-   * Méthode appelée lorsque l'événement 'select' est déclenché
-   * @param event - Les données de l'événement sélectionné
-   */
-  onSelect(event: any): void {
-    // Par exemple, vous pouvez naviguer vers une page de détails en passant le nom du pays
+  onSelect(event: { name: string }): void {
     this.router.navigate(['/details', event.name]);
   }
 }
