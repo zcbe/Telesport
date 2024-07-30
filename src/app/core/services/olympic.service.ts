@@ -1,7 +1,7 @@
 // Importation des modules nécessaires
 import { HttpClient } from '@angular/common/http'; // Service pour effectuer des requêtes HTTP
 import { Injectable } from '@angular/core'; // Décorateur pour indiquer que la classe peut être injectée en tant que dépendance
-import { BehaviorSubject } from 'rxjs'; // Subject de RxJS qui stocke la dernière valeur émise et l'émet aux nouveaux abonnés
+import { BehaviorSubject, take } from 'rxjs'; // Subject de RxJS qui stocke la dernière valeur émise et l'émet aux nouveaux abonnés
 import { catchError, tap } from 'rxjs/operators'; // Opérateurs RxJS pour manipuler les flux de données
 
 // Décorateur @Injectable marque cette classe comme pouvant être injectée dans d'autres composants ou services
@@ -35,7 +35,8 @@ export class OlympicService {
         this.olympics$.next(null);
         // Retourne l'erreur pour permettre un traitement ultérieur
         return caught;
-      })
+      }),
+      take(1)
     );
   }
 

@@ -13,6 +13,7 @@ import { NgxChartsModule, PieChartModule, TooltipContentComponent } from '@swiml
 import { TitleInformationComponent } from './components/title-information/title-information.component';
 import { PieChartTooltipComponent } from './components/pie-chart-tooltip/pie-chart-tooltip.component';
 import { DetailsComponent } from './pages/detail/details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -41,7 +42,8 @@ const routes: Routes = [
     HeaderComponent,
     PieChartTooltipComponent,
     TitleInformationComponent,
-    PieChartModule
+    PieChartModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
