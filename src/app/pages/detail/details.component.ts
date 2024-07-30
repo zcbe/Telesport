@@ -132,7 +132,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   // Méthode appelée lorsqu'un élément du graphique est sélectionné
   onSelect(event: { name: string; value: number; }) {
-    console.log(event); // Affichage de l'événement dans la console (à des fins de débogage)
+    console.log(event); // Affichag de l'événement dans la console (à des fins de débogage)
   }
 
   // Méthode pour revenir à la page d'accueil
